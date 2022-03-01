@@ -1,4 +1,5 @@
 import pyttsx3
+import speech_recognition as sr
 import datetime
 
 engine = pyttsx3.init('sapi5')
@@ -24,6 +25,24 @@ def wishme():
     speak("I am Naruto, How may I help you?")
 
 
+# function to take microphone inputs
+def takecommand():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening...")
+        r.pause_threshold = 1
+        audio = r.listen(source)
+
+    try:
+        query = r.recognize_google(audio,language='en-in')
+        print(f"You said: {query}\n")
+
+    except Exception as e:
+        print("Please say again...")
+        return "None"
+
+    return query
 
 if __name__=="__main__":
     wishme()
+    query = takecommand().lower()
