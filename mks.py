@@ -40,6 +40,7 @@ def takecommand():
         audio = r.listen(source)
 
     try:
+        print("Recognizing...")
         query = r.recognize_google(audio,language='en-in')
         print(f"You said: {query}\n")
 
@@ -68,5 +69,13 @@ if __name__=="__main__":
         elif 'play music' in query:
             music_dir = "D:\\SNIPER MKS"
             songs = os.listdir(music_dir)
-            random_no = random.randint(0,sizeof(songs)-1)
+            random_no = random.randint(0,len(songs)-1)
             os.startfile(os.path.join(music_dir,songs[random_no]))
+
+        elif 'time' in query:
+            strTime = datetime.datetime.now().strftime("%H:%M:%S")
+            speak(f"Sir, Right now the time is  {strTime}")
+
+        elif 'code' in query:
+            codePath = "C:\\Users\\mohit\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
+            os.startfile(codePath)
