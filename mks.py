@@ -1,8 +1,12 @@
+from ctypes import sizeof
+from random import random
 import pyttsx3
 import speech_recognition as sr
 import datetime
 import wikipedia
 import webbrowser
+import os
+import random
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -58,5 +62,11 @@ if __name__=="__main__":
             speak("According to wikipedia")
             speak(results)
 
-        elif 'open youtube' or 'youtube' in query:
+        elif 'open youtube' in query:
             webbrowser.open('youtube.com')
+
+        elif 'play music' in query:
+            music_dir = "D:\\SNIPER MKS"
+            songs = os.listdir(music_dir)
+            random_no = random.randint(0,sizeof(songs)-1)
+            os.startfile(os.path.join(music_dir,songs[random_no]))
